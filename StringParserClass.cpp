@@ -17,30 +17,34 @@ StringParserClass::StringParserClass(){
 	areTagsSet = 0;
 }
 
-StringParserClass::~StringParserClass(void){
-	StringParserClass::cleanup();
+StringParserClass::~StringParserClass(){
+	cleanup();
 }
 
 
 
 int StringParserClass::setTags(const char *pStart, const char *pEnd){
-	 if( (pStart == NULL) || (pEnd == NULL)){
+	if( (pStart == 0) || (pEnd == 0)){
 		return ERROR_TAGS_NULL;
 	}
 	else{
+		pStartTag = (char*)pStart;
+		pEndTag = (char*)pEnd;
+		areTagsSet = true;
 		return SUCCESS;
 	}
  }
 
 int StringParserClass::getDataBetweenTags(char *pDataToSearchThru, std::vector<std::string> &myVector){
 	myVector.clear();
-	if (pDataToSearchThru == NULL){
+	if( (pStartTag == 0) || (pEndTag == 0)){
+			return ERROR_TAGS_NULL;
+		}
+	else if (pDataToSearchThru == 0){
 		return ERROR_DATA_NULL;
 	}
-//	else if( (pStartTag == NULL) || (pEndTag == NULL)){
-//		return ERROR_TAGS_NULL;
-//	}
 	else{
+
 		return SUCCESS;
 	}
 }
@@ -59,42 +63,15 @@ void StringParserClass::cleanup(){
 	}
 }
 
-//class KP_StringParserClass::StringParserClass{
-//	public:
-//	int setTags(const char *pStart, const char *pEnd){
-//		if( (pStart == NULL) || (pEnd == NULL)){
-//			return ERROR_TAGS_NULL;
-//		}
-//		else{
-//			return SUCCESS;
-//		}
-//	}
-//	int getDataBetweenTags(char *pDataToSearchThru, std::vector<std::string> &myVector){
-//		if (pDataToSearchThru == NULL){
-//			return ERROR_DATA_NULL;
-//		}
-//		else{
-//			return SUCCESS;
-//		}
-//	}
-//
-//};
+int StringParserClass::findTag(char *pTagToLookFor, char *&pStart, char *&pEnd){
+	if( (pStart == 0) || (pEnd == 0)){
+			return ERROR_TAGS_NULL;
+		}
+	else if (){
 
-//int KP_StringParserClass::StringParserClass::setTags(const char *pStart, const char *pEnd){
-//	if( (pStart == NULL) || (pEnd == NULL)){
-//		return ERROR_TAGS_NULL;
-//	}
-//	else{
-//		return SUCCESS;
-//	}
-//}
-//
-//int KP_StringParserClass::StringParserClass::getDataBetweenTags(char *pDataToSearchThru, std::vector<std::string> &myVector){
-//	if (pDataToSearchThru == NULL){
-//		return ERROR_DATA_NULL;
-//	}
-//	else{
-//		return SUCCESS;
-//	}
-//}
-
+		return FAIL;
+	}
+	else{
+		return SUCCESS;
+	}
+}
