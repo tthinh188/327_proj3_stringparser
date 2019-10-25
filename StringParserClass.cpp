@@ -44,7 +44,17 @@ int StringParserClass::getDataBetweenTags(char *pDataToSearchThru, std::vector<s
 		return ERROR_DATA_NULL;
 	}
 	else{
-
+		std::string data = pDataToSearchThru;
+		int start = data.find("<to>");
+		int end = data.find("</to>");
+		while(	(start!= std::string::npos) && (end!= std::string::npos)){
+			start = data.find("<to>");
+			end = data.find("</to>");
+			if (start != -1 && end != -1){
+				myVector.push_back(data.substr(start + 4, (end - start-4)));
+			}
+			data = data.substr(end+5);
+		}
 		return SUCCESS;
 	}
 }
@@ -59,7 +69,7 @@ void StringParserClass::cleanup(){
 		pEndTag = 0;
 	}
 	if (areTagsSet){
-		areTagsSet = 0;
+		areTagsSet = false;
 	}
 }
 
@@ -67,11 +77,10 @@ int StringParserClass::findTag(char *pTagToLookFor, char *&pStart, char *&pEnd){
 	if( (pStart == 0) || (pEnd == 0)){
 			return ERROR_TAGS_NULL;
 		}
-	else if (){
-
+	else if( (*pTagToLookFor != *pStart) && (*pEnd == 0)) {
 		return FAIL;
 	}
-	else{
+	else {
 		return SUCCESS;
 	}
 }
